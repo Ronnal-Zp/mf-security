@@ -1,0 +1,57 @@
+<div class=" container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-5">
+        
+            <div class="loginMain col-12"> 
+                
+                <div class="loginMain__title">
+                    <h4>INICIAR SESIÓN</h4>
+                </div>
+        
+                <div class="loginMain__formContainer mb-3">
+                    <form class="loginMain__form">
+                        <div class="mb-4">
+                            <input class="form-control" placeholder="Usuario" type="email" id="inputPassword5"  [formControl]="emailFormControl" >
+
+                            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                                Porfavor ingrese un correo valido
+                            </mat-error>
+                            <mat-error *ngIf="emailFormControl.hasError('required') && emailFormControl.touched ">
+                                <small>El correo es <strong style="color: red;">requerido</strong></small>
+                            </mat-error>
+                        </div>
+                        
+        
+                        
+                        <div>
+                            <input class="form-control" type="password" id="inputPassword5" placeholder="Contraseña" [formControl]="emailFormControl">
+
+                            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                                Porfavor ingrese una contraseña valida
+                            </mat-error>
+                            <mat-error *ngIf="emailFormControl.hasError('required') && emailFormControl.touched ">
+                            <small>La contraseña es <strong style="color: red">requrida</strong></small>
+                            </mat-error>
+                        </div>
+                    </form>
+                </div>
+                
+            
+                <a href="" class="loginMain__signIn">Iniciar Sesión</a>
+                <a routerLink="/security/recovery-password">Olvide mi contraseña</a>
+            
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-7 d-none d-md-block">
+            <div class="loginDetail">
+                <div class="loginDetail__logo">
+                    <img src="http://143.198.176.153/assets/company/login.png" alt="">
+                </div>
+        
+                <p class="text-white-50 fs-4">Fuse helps developers to build organized and well coded dashboards full of beautiful and rich modules. Join us and start building your application today.</p>
+            </div>  
+        </div>
+
+    </div>
+</div>
