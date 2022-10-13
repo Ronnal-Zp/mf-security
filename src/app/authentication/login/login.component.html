@@ -11,7 +11,7 @@
                 <div class="loginMain__formContainer mb-3">
                     <form class="loginMain__form">
                         <div class="mb-4">
-                            <input class="form-control" placeholder="Usuario" type="email" id="inputPassword5"  [formControl]="emailFormControl" >
+                            <input class="form-control" type="email" placeholder="Usuario" [formControl]="emailFormControl" >
 
                             <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                                 Porfavor ingrese un correo valido
@@ -24,7 +24,7 @@
         
                         
                         <div>
-                            <input class="form-control" type="password" id="inputPassword5" placeholder="Contraseña" [formControl]="emailFormControl">
+                            <input class="form-control" type="password"  placeholder="Contraseña" [formControl]="emailFormControl">
 
                             <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                                 Porfavor ingrese una contraseña valida
@@ -37,7 +37,7 @@
                 </div>
                 
             
-                <a href="" class="loginMain__signIn">Iniciar Sesión</a>
+                <a (click)="login()" class="loginMain__signIn">Iniciar Sesión</a>
                 <a routerLink="/security/recovery-password">Olvide mi contraseña</a>
             
             </div>

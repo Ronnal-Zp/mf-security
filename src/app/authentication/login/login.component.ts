@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FormlyFieldConfig } from '@ngx-formly/core';
+import { LoginService } from '../../services/login.service';
 
 
 
@@ -28,9 +29,29 @@ export class LoginComponent implements OnInit {
 
 
 
-  constructor() { }
+  constructor(
+    private loginService: LoginService
+  ) { }
 
   ngOnInit(): void {
+    
+  }
+
+  login(){
+    this.loginService.getData().subscribe((res) => { 
+        let user = res.data.user
+        let profile = res.data.profile
+        let company = res.data.company
+        let options = res.data.options
+        let token = res.data.token
+
+        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('profile', JSON.stringify(profile));
+        localStorage.setItem('company', JSON.stringify(company));
+        localStorage.setItem('options', JSON.stringify(options));
+        localStorage.setItem('token', token);
+      
+    })
   }
 
 }
