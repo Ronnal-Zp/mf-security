@@ -11,7 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ConfigInterceptorService } from "./services/config-interceptor.service";
 import { ToastrModule } from "ngx-toastr";
-import { SharedMaterialModule } from './shared/shared-material/shared-material.module';
+import { SharedMaterialModule } from './shared/shared-material/modules/shared-material.module';
 
 @NgModule({
   declarations: [

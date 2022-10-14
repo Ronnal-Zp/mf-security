@@ -9,35 +9,37 @@
                 </div>
         
                 <div class="loginMain__formContainer mb-3">
-                    <form class="loginMain__form">
+                    <form class="loginMain__form" [formGroup]="formGroup" (ngSubmit)="onSubmitV2()">
                         <div class="mb-4">
-                            <input class="form-control" type="email" placeholder="Usuario" [formControl]="emailFormControl" >
+                            <input class="form-control" type="text" placeholder="Usuario" [formControlName]="'username'">
 
-                            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                            <!-- <mat-error *ngIf="formGroup.get('usrEmail')?.hasError('email') && !formGroup.hasError('required')">
                                 Porfavor ingrese un correo valido
-                            </mat-error>
-                            <mat-error *ngIf="emailFormControl.hasError('required') && emailFormControl.touched ">
-                                <small>El correo es <strong style="color: red;">requerido</strong></small>
+                            </mat-error> -->
+                            <mat-error *ngIf="formGroup.get('username')?.hasError('required') && formGroup.get('username')?.touched ">
+                                <small>El usuario es <strong style="color: red;">requerido</strong></small>
                             </mat-error>
                         </div>
                         
-        
-                        
+                 
                         <div>
-                            <input class="form-control" type="password"  placeholder="Contraseña" [formControl]="emailFormControl">
+                            <input class="form-control" type="password"  placeholder="Contraseña" [formControlName]="'password'">
 
-                            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                                Porfavor ingrese una contraseña valida
-                            </mat-error>
-                            <mat-error *ngIf="emailFormControl.hasError('required') && emailFormControl.touched ">
+                            <mat-error *ngIf="formGroup.get('password')?.hasError('required') && formGroup.get('password')?.touched ">
                             <small>La contraseña es <strong style="color: red">requrida</strong></small>
                             </mat-error>
                         </div>
+
+                        <button type="submit" (click)="onSubmit($event)" class="loginMain__signIn">Iniciar Sesión</button>
+                        <!-- <div>
+                            <input type="submit" value="">
+                            <span>Inciciar sesion</span>
+                        </div> -->
                     </form>
                 </div>
                 
             
-                <a (click)="login()" class="loginMain__signIn">Iniciar Sesión</a>
+                
                 <a routerLink="/security/recovery-password">Olvide mi contraseña</a>
             
             </div>

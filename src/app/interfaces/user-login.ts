@@ -5,7 +5,7 @@ export interface ResponseUserLogin {
 
 export interface Data {
     user:    User;
-    profile: Company;
+    profile: Profile;
     company: Company;
     token:   string;
     options: Option[];
@@ -15,7 +15,6 @@ export interface Company {
     id:     number;
     name:   string;
     status: boolean;
-    code?:  string;
 }
 
 export interface Option {
@@ -31,4 +30,16 @@ export interface User {
     id:       number;
     fullname: string;
     mail:     string;
+}
+
+export interface Profile{
+    id: number,
+    name: string,
+    code: string,
+    status: boolean
+}
+
+export interface UserLogin {
+    name: string,
+    password: string
 }

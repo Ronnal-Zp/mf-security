@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { LoginService } from '../../services/login.service';
+import { User, Company, Profile, Option } from '../../interfaces/user-login';
+import { EncryptService } from '../../shared/services/encrypt.service';
+import { StorageService } from '../../shared/services/storage-service.service';
 
 
 
@@ -21,37 +24,55 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class LoginComponent implements OnInit {
 
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   matcher = new MyErrorStateMatcher();
-
-  formGroup: FormGroup = new FormGroup({});
   fields: FormlyFieldConfig[] = [];
 
 
+  private _user!: User;
+  private _profile!: Profile;
+  private _company!: Company;
+  private _options!: Option[];
+  private _token!: string;
+
+
+  formGroup!: FormGroup; 
 
   constructor(
-    private loginService: LoginService
+    private loginService: LoginService,
+    private encryptService: EncryptService,
+    private storageService: StorageService,
+    private builder: FormBuilder
   ) { }
 
   ngOnInit(): void {
-    
-  }
-
-  login(){
-    this.loginService.getData().subscribe((res) => { 
-        let user = res.data.user
-        let profile = res.data.profile
-        let company = res.data.company
-        let options = res.data.options
-        let token = res.data.token
-
-        localStorage.setItem('user', JSON.stringify(user));
-        localStorage.setItem('profile', JSON.stringify(profile));
-        localStorage.setItem('company', JSON.stringify(company));
-        localStorage.setItem('options', JSON.stringify(options));
-        localStorage.setItem('token', token);
-      
+    this.formGroup = this.builder.group({
+      username: ["", Validators.required],
+      password: ["", Validators.required]
     })
   }
 
+  onSubmitV2(){
+
+    this.loginService.SignIn(this.formGroup.value).subscribe((res) => { 
+
+      this.storageService.setData(res.data)
+
+  
+    })
+
+    
+  }
+
+
+  onSubmit(e: any){
+    e.preventDefault();
+    
+    this.loginService.SignIn(this.formGroup.value).subscribe((res) => { 
+      this.storageService.setData(res.data)
+    })
+    
+    //Prueba token
+    this.storageService.getToken();
+    
+  }
 }

@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   username: "admin_co",
-  password: "hola"
+  password: "hola",
+  SECRET_KEY: "eb5d2e4f28460c99afca48e892498c3720e4b4c1f1a8db8f65fa17531c4acf9e"
 };
 
 /*
