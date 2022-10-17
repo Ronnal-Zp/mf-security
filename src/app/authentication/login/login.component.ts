@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
   private _token!: string;
 
 
-  formGroup!: FormGroup; 
+  formGroup!: FormGroup;
 
   constructor(
     private loginService: LoginService,
@@ -53,26 +53,34 @@ export class LoginComponent implements OnInit {
 
   onSubmitV2(){
 
-    this.loginService.SignIn(this.formGroup.value).subscribe((res) => { 
+    this.loginService.SignIn(this.formGroup.value).subscribe((res) => {
 
       this.storageService.setData(res.data)
 
-  
+
     })
 
-    
+
   }
 
 
   onSubmit(e: any){
     e.preventDefault();
-    
-    this.loginService.SignIn(this.formGroup.value).subscribe((res) => { 
+
+    this.loginService.SignIn(this.formGroup.value).subscribe((res) => {
       this.storageService.setData(res.data)
     })
-    
+
     //Prueba token
     this.storageService.getToken();
-    
+
+
+    //Prueba token simple
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0LCJjb21wYW55SWQiOjIsInByb2ZpbGVJZCI6MiwiY29kZVByb2ZpbGUiOiJBRE1JTl9DTyIsImlhdCI6MTY2NTk1NDQxNywiZXhwIjoxNjY2MDQwODE3fQ.UjHeWcy-_1K1aS-XJ1FqBo6REWukMY7wSHHL5zseqr0";
+
+    const msgEnc = this.encryptService.encrypt(token);
+    const msgDec = this.encryptService.decrypt(msgEnc);
+    console.log(msgDec);
+
   }
 }

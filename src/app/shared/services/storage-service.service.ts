@@ -9,6 +9,10 @@ import { EncryptService } from './encrypt.service';
 export class StorageService {
 
   key!: string;
+  value!: string;
+  isToken!: string;
+  keyDescrypt!: string;
+  valueDescrypt!: string;
 
 
   constructor(
@@ -33,19 +37,40 @@ export class StorageService {
   }
 
 
-  arrKeys: string[] = [];
   getToken(){
-    for (let i = 0; i < localStorage.length; i++) {
-      
-      this.key = localStorage.key(i) ?? '';
 
-      const keyDescrypt = this._encryptService.decrypt(this.key);
-      this.arrKeys = keyDescrypt.toString().split(',');
+    if(localStorage.length > 0){
 
-      if(this.arrKeys[0] == "token")
-        return this.arrKeys[1];
-      
-    } 
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i) ?? '';
+        let value = localStorage.getItem(key) ?? '';
+        console.log(value);
+
+        const valueDescrypt = this._encryptService.decrypt(value);
+        console.log(valueDescrypt);
+
+
+
+        // const keyDescrypt = this._encryptService.decrypt(key);
+        // this.arrKeys = this.keyDescrypt.toString().split(',');
+        // let isToken = this.arrKeys[0];
+
+        // console.log(this.arrKeys);
+        // if(isToken === "token")
+        //   return this.arrKeys[1];
+
+      }
+    }
+
+
+  }
+
+
+
+  clear(){
+    localStorage.clear()
   }
 
 }
+
+
